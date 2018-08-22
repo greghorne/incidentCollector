@@ -76,8 +76,14 @@ while true
 
     json['Incidents']['Incident'].each do |child|
 
-        response_insert = conn.query("replace into tfd_incidents values($1, $2, $3, $4, $5, $6, $7)", [pp child['IncidentNumber'], 
-                      child['Problem'], child['Address'], child['ResponseDate'], child['Latitude'], child['Longitude'], child['Vehicles']])
+        str = "insert into tfd_incidents values('" + child['IncidentNumber'].to_s + "','" + child['Problem'].to_s + "','" + child['Address'].to_s + "','" + child['ResponseDate'].to_s + "','" + child['Latitude'].to_s + "','" + child['Longitude'].to_s + "','" + child['Vehicles']['Vehicle'].to_s + "')"
+        str = "insert into tfd_incidents values('" + child['IncidentNumber'].to_s + "','" + child['Problem'].to_s + "','" + child['Address'].to_s + "','" + child['ResponseDate'].to_s + "','" + child['Latitude'].to_s + "','" + child['Longitude'].to_s + "','"Greg"')"
+        pp str
+        puts
+        response_insert = conn.query(str)
+                      
+                    #   insert into KEYS (name, value) values (
+                    #     'blah', 'true') on conflict (name) do nothing;
 
     end
 
@@ -95,7 +101,7 @@ end
     #     pp child['Longitude']
     #     pp child['Vehicles']
     #     puts "---------------"
-    
+
 # create table tfd_incidents(
 #     IncidentNumber text primary key not null,
 #     Problem text not null,
