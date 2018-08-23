@@ -1,23 +1,9 @@
-# coding utf-
+# encoding utf-8
 
 require 'open-uri'
 require 'json'
 require 'pg'
 require 'pp'
-
-def getJSON()
-
-end
-
-
-def getConnect()
-
-end
-
-
-def processJSON()
-
-end
 
 def self.get_db_conn()
 
@@ -74,9 +60,18 @@ while true
         end
     end
 
-    conn.close
-    puts "Records Inserted: " + counter.to_s
+    response_query = conn.query("select count(*) from tfd_incidents")
+    numRows = response_query[0]['count']
 
-    sleep 60
-    puts "---------------"
+    conn.close
+
+    puts
+    puts "------------------------------"
+    puts Time.now
+    puts "Records Inserted: " + counter.to_s
+    puts "Number Records:   " + numRows
+    puts "------------------------------"
+    
+    sleep 900
+    
 end
