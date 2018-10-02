@@ -42,7 +42,8 @@ $db_user = ENV['RAILS_USER']
 $db_pwd  = ENV['RAILS_PASSWORD']
 
 while true
-    
+
+  begin
     content = open(http).read
     json = JSON.parse(content)
 
@@ -72,6 +73,9 @@ while true
     puts "Number Records:   " + numRows
     puts "------------------------------"
     
-    sleep 900
+  rescue
+  end
+
+    sleep 1800
     
 end
