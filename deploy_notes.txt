@@ -1,15 +1,20 @@
 Docker Deploy
 
+=====================
 Dockerfile -
+
 FROM arm64v8/ruby:latest
 COPY ./src/* /root/
 
 RUN gem install pg
 RUN gem update
 CMD ruby /root/incidentCollector.rb
+=====================
 
 
+=====================
 up.sh -
+
 sudo docker stop incident_collector
 sudo docker rm incident_collector
 
@@ -36,6 +41,12 @@ sudo docker run -dit \
 --restart unless-stopped \
 --name incident_collector \
 incident_collector
+=====================
 
 
+=====================
+down.sh -
 
+sudo docker stop incident_collector
+sudo docker rm incident_collector
+=====================
