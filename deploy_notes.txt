@@ -1,0 +1,41 @@
+Docker Deploy
+
+Dockerfile -
+FROM arm64v8/ruby:latest
+COPY ./src/* /root/
+
+RUN gem install pg
+RUN gem update
+CMD ruby /root/incidentCollector.rb
+
+
+up.sh -
+sudo docker stop incident_collector
+sudo docker rm incident_collector
+
+cd /home/pirate/incidentCollector
+rm -rf src
+
+mkdir src
+cd src
+
+git clone https://github.com/greghorne/incidentCollector .
+
+cd ..
+pwd
+
+sudo docker build -t incident_collector .
+
+sudo docker run -dit \
+-e RAILS_DB='abc' \
+-e RAILS_PORT=1234 \
+-e RAILS_SERVER='192.168.1.72' \
+-e RAILS_USER='abc' \
+-e RAILS_PASSWORD='abc' \
+-p 5432:5432 \
+--restart unless-stopped \
+--name incident_collector \
+incident_collector
+
+
+
