@@ -41,6 +41,8 @@ $db_port = ENV['RAILS_PORT']
 $db_user = ENV['RAILS_USER']
 $db_pwd  = ENV['RAILS_PASSWORD']
 
+$db_polling_time = ENV['RAILS_POLLING_TIME']
+
 while true
 
   begin
@@ -76,6 +78,6 @@ while true
   rescue
   end
 
-    sleep 1800
+    sleep $db_polling_time.to_i
     
 end
