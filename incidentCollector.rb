@@ -78,6 +78,7 @@ while true
   rescue
   end
 
-    sleep $db_polling_time.to_i
+    #sleep $db_polling_time.to_i
+    sleep(10.minutes)
     
 end
