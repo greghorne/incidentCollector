@@ -79,6 +79,6 @@ while true
   end
 
     #sleep $db_polling_time.to_i
-    sleep(60.minutes)
+    sleep 1800
     
 end
